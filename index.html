@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sharib Hasan — Data Scientist | ML Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0A0C10;
+  --surface: #12151C;
+  --card: #181C26;
+  --border: #252A36;
+  --text: #E4E7EF;
+  --muted: #8B92A5;
+  --accent: #4AE3B5;
+  --accent2: #3B82F6;
+  --white: #FFFFFF;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+body::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+}
+.container { max-width: 1100px; margin: 0 auto; padding: 0 32px; position: relative; z-index: 1; }
+
+/* NAV */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 20px 32px;
+  background: rgba(10,12,16,0.85);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(37,42,54,0.5);
+}
+nav .nav-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.nav-logo {
+  font-family: 'Space Mono', monospace;
+  font-size: 16px;
+  color: var(--white);
+  font-weight: 700;
+  text-decoration: none;
+}
+.nav-logo span { color: var(--accent); }
+.nav-links { display: flex; gap: 32px; }
+.nav-links a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.3s;
+}
+.nav-links a:hover { color: var(--accent); }
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  top: -200px; right: -300px;
+  width: 700px; height: 700px;
+  background: radial-gradient(circle, rgba(74,227,181,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-content { width: 100%; }
+.hero-tag {
+  font-family: 'Space Mono', monospace;
+  font-size: 13px;
+  color: var(--accent);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  opacity: 0;
+  animation: fadeUp 0.8s ease forwards 0.2s;
+}
+.hero h1 {
+  font-size: clamp(42px, 6vw, 72px);
+  font-weight: 700;
+  line-height: 1.08;
+  color: var(--white);
+  margin-bottom: 28px;
+  opacity: 0;
+  animation: fadeUp 0.8s ease forwards 0.4s;
+}
+.hero h1 span { color: var(--accent); }
+.hero-desc {
+  font-size: 18px;
+  color: var(--muted);
+  max-width: 640px;
+  margin-bottom: 40px;
+  opacity: 0;
+  animation: fadeUp 0.8s ease forwards 0.6s;
+}
+.hero-stats {
+  display: flex;
+  gap: 48px;
+  opacity: 0;
+  animation: fadeUp 0.8s ease forwards 0.8s;
+}
+.stat-item { text-align: left; }
+.stat-number {
+  font-family: 'Space Mono', monospace;
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--accent);
+}
+.stat-label {
+  font-size: 13px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+/* SECTIONS */
+section { padding: 100px 0; }
+.section-tag {
+  font-family: 'Space Mono', monospace;
+  font-size: 12px;
+  color: var(--accent);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.section-title {
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 48px;
+}
+
+/* ABOUT */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: start;
+}
+.about-text { font-size: 16px; color: var(--muted); }
+.about-text p { margin-bottom: 16px; }
+.info-cards { display: flex; flex-direction: column; gap: 16px; }
+.info-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px 24px;
+  transition: border-color 0.3s;
+}
+.info-card:hover { border-color: var(--accent); }
+.info-card-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--accent);
+  margin-bottom: 6px;
+  font-family: 'Space Mono', monospace;
+}
+.info-card-value { font-size: 15px; color: var(--text); font-weight: 500; }
+
+/* SKILLS */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+.skill-group {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 28px;
+  transition: transform 0.3s, border-color 0.3s;
+}
+.skill-group:hover { transform: translateY(-4px); border-color: var(--accent); }
+.skill-group-title {
+  font-family: 'Space Mono', monospace;
+  font-size: 13px;
+  color: var(--accent);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.skill-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.skill-tag {
+  background: rgba(74,227,181,0.08);
+  border: 1px solid rgba(74,227,181,0.15);
+  color: var(--text);
+  padding: 6px 14px;
+  border-radius: 100px;
+  font-size: 13px;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+.skill-tag:hover { background: rgba(74,227,181,0.15); }
+
+/* PROJECTS */
+.project-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 40px;
+  margin-bottom: 24px;
+  transition: border-color 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+.project-card:hover { border-color: var(--accent); }
+.project-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 4px; height: 100%;
+  background: linear-gradient(180deg, var(--accent), var(--accent2));
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.project-card:hover::before { opacity: 1; }
+.project-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.project-badge {
+  background: rgba(74,227,181,0.1);
+  color: var(--accent);
+  padding: 4px 14px;
+  border-radius: 100px;
+  font-size: 12px;
+  font-family: 'Space Mono', monospace;
+  letter-spacing: 1px;
+}
+.project-date { font-size: 13px; color: var(--muted); font-family: 'Space Mono', monospace; }
+.project-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 12px;
+}
+.project-desc { font-size: 15px; color: var(--muted); margin-bottom: 20px; }
+.project-results {
+  background: var(--surface);
+  border-radius: 10px;
+  padding: 20px 24px;
+  margin-bottom: 20px;
+}
+.project-results-title {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--accent);
+  margin-bottom: 12px;
+  font-family: 'Space Mono', monospace;
+}
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 16px;
+}
+.metric { text-align: center; padding: 8px; }
+.metric-value {
+  font-family: 'Space Mono', monospace;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--accent);
+}
+.metric-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-top: 2px; }
+.project-tech { display: flex; flex-wrap: wrap; gap: 8px; }
+.tech-tag {
+  background: rgba(59,130,246,0.1);
+  border: 1px solid rgba(59,130,246,0.2);
+  color: var(--accent2);
+  padding: 4px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-family: 'Space Mono', monospace;
+}
+
+/* EXPERIENCE */
+.exp-item {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 40px;
+  padding: 32px 0;
+  border-bottom: 1px solid var(--border);
+}
+.exp-date {
+  font-family: 'Space Mono', monospace;
+  font-size: 13px;
+  color: var(--accent);
+  padding-top: 4px;
+}
+.exp-role { font-size: 20px; font-weight: 700; color: var(--white); margin-bottom: 4px; }
+.exp-company { font-size: 14px; color: var(--muted); margin-bottom: 12px; }
+.exp-bullets { list-style: none; }
+.exp-bullets li {
+  position: relative;
+  padding-left: 20px;
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: var(--muted);
+}
+.exp-bullets li::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 10px;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+/* EDUCATION */
+.edu-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+.edu-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 32px;
+  transition: border-color 0.3s;
+}
+.edu-card:hover { border-color: var(--accent); }
+.edu-degree { font-size: 20px; font-weight: 700; color: var(--white); margin-bottom: 6px; }
+.edu-school { font-size: 14px; color: var(--accent); margin-bottom: 4px; font-family: 'Space Mono', monospace; }
+.edu-year { font-size: 13px; color: var(--muted); }
+.edu-detail { font-size: 13px; color: var(--muted); margin-top: 12px; line-height: 1.6; }
+
+/* CONTACT */
+.contact-section { text-align: center; padding: 100px 0 120px; }
+.contact-section h2 {
+  font-size: 42px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 16px;
+}
+.contact-desc { font-size: 16px; color: var(--muted); margin-bottom: 40px; }
+.contact-links { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+.contact-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 14px 28px;
+  border-radius: 100px;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+.contact-link:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-2px);
+}
+
+/* DOWNLOAD BUTTONS */
+.btn-download {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--accent);
+  color: var(--bg);
+  padding: 14px 28px;
+  border-radius: 100px;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.3s;
+  letter-spacing: 0.5px;
+}
+.btn-download:hover {
+  background: var(--white);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(74,227,181,0.2);
+}
+.btn-download svg { flex-shrink: 0; }
+.btn-download-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  color: var(--accent);
+  padding: 10px 22px;
+  border-radius: 100px;
+  border: 1px solid var(--accent);
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s;
+  font-family: 'Space Mono', monospace;
+  letter-spacing: 0.5px;
+  margin-top: 16px;
+}
+.btn-download-outline:hover {
+  background: rgba(74,227,181,0.1);
+  transform: translateY(-2px);
+}
+.hero-actions {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 48px;
+}
+
+/* ANIMATIONS */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.fade-in {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .about-grid, .edu-grid { grid-template-columns: 1fr; }
+  .exp-item { grid-template-columns: 1fr; gap: 8px; }
+  .hero-stats { flex-wrap: wrap; gap: 24px; }
+  .project-card { padding: 24px; }
+  nav .nav-links { display: none; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">Sharib Hasan<span>.</span></a>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Research</a>
+      <a href="#experience">Experience</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-tag">Data Scientist &amp; ML Engineer</div>
+      <h1>Building ML systems<br>for <span>finance, health<br>&amp; climate</span></h1>
+      <p class="hero-desc">I build end-to-end machine learning pipelines that forecast financial markets, analyse healthcare outcomes, and solve real-world problems with data. MSc Data Science (Distinction), Heriot-Watt University.</p>
+      <div class="hero-actions" style="opacity:0; animation: fadeUp 0.8s ease forwards 0.7s;">
+        <a href="./Sharib_Hasan_CV.pdf" download class="btn-download">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+          Download CV
+        </a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-number">4+</div>
+          <div class="stat-label">Years Experience</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">96.4%</div>
+          <div class="stat-label">LSTM Forecast Accuracy</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">6</div>
+          <div class="stat-label">ML Models Deployed</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">4</div>
+          <div class="stat-label">Asset Classes Modelled</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="container">
+    <div class="section-tag">About</div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>I recently completed my MSc in Data Science at Heriot-Watt University, Edinburgh, building on a BEng in Information Technology from Manipal University Jaipur. This academic foundation has shaped a deep understanding of both the theoretical frameworks and applied methods that drive modern machine learning, statistical modelling, and computational analysis.</p>
+        <p>Across my work and research, I have developed strong expertise in practical machine learning, time series forecasting, computer vision, and data engineering. A significant part of my recent work has focused on financial systems and tokenised digital markets, where I have explored the behaviour, volatility, and predictive modelling of emerging asset classes.</p>
+        <p>My broader interests extend toward applications of machine learning in high-impact, data-rich domains, including those emerging within space technologies and satellite-driven systems. I am drawn to questions that sit at the intersection of modelling, forecasting, and large-scale structured data.</p>
+      </div>
+      <div class="info-cards">
+        <div class="info-card">
+          <div class="info-card-label">Location</div>
+          <div class="info-card-value">Edinburgh, United Kingdom</div>
+        </div>
+        <div class="info-card">
+          <div class="info-card-label">Degree</div>
+          <div class="info-card-value">MSc Data Science (Distinction)</div>
+        </div>
+        <div class="info-card">
+          <div class="info-card-label">Specialisation</div>
+          <div class="info-card-value">Time Series Forecasting, Deep Learning, Financial ML</div>
+        </div>
+        <div class="info-card">
+          <div class="info-card-label">Work Status</div>
+          <div class="info-card-value">Right to Work in the UK</div>
+        </div>
+        <div class="info-card">
+          <div class="info-card-label">Research Interest</div>
+          <div class="info-card-value">ML for Space Technologies &amp; Satellite Systems</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="container">
+    <div class="section-tag">Toolkit</div>
+    <h2 class="section-title">Core Competencies</h2>
+    <div class="skills-grid">
+      <div class="skill-group fade-in">
+        <div class="skill-group-title">ML &amp; Deep Learning</div>
+        <div class="skill-tags">
+          <span class="skill-tag">LSTM</span>
+          <span class="skill-tag">CNN</span>
+          <span class="skill-tag">XGBoost</span>
+          <span class="skill-tag">LightGBM</span>
+          <span class="skill-tag">Random Forest</span>
+          <span class="skill-tag">PSO-ANN</span>
+          <span class="skill-tag">K-Means</span>
+          <span class="skill-tag">NLP</span>
+        </div>
+      </div>
+      <div class="skill-group fade-in">
+        <div class="skill-group-title">Time Series &amp; Forecasting</div>
+        <div class="skill-tags">
+          <span class="skill-tag">ARIMA / SARIMA</span>
+          <span class="skill-tag">Prophet</span>
+          <span class="skill-tag">Feature Engineering</span>
+          <span class="skill-tag">Technical Indicators</span>
+          <span class="skill-tag">Rolling Statistics</span>
+        </div>
+      </div>
+      <div class="skill-group fade-in">
+        <div class="skill-group-title">Languages &amp; Frameworks</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">SQL</span>
+          <span class="skill-tag">R</span>
+          <span class="skill-tag">TensorFlow</span>
+          <span class="skill-tag">Keras</span>
+          <span class="skill-tag">Scikit-Learn</span>
+          <span class="skill-tag">Pandas</span>
+          <span class="skill-tag">NumPy</span>
+        </div>
+      </div>
+      <div class="skill-group fade-in">
+        <div class="skill-group-title">Data &amp; Visualisation</div>
+        <div class="skill-tags">
+          <span class="skill-tag">D3.js</span>
+          <span class="skill-tag">Tableau</span>
+          <span class="skill-tag">Power BI</span>
+          <span class="skill-tag">Plotly</span>
+          <span class="skill-tag">Matplotlib</span>
+          <span class="skill-tag">Seaborn</span>
+        </div>
+      </div>
+      <div class="skill-group fade-in">
+        <div class="skill-group-title">Engineering &amp; Cloud</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Git</span>
+          <span class="skill-tag">Docker</span>
+          <span class="skill-tag">AWS</span>
+          <span class="skill-tag">Linux</span>
+          <span class="skill-tag">Jupyter</span>
+          <span class="skill-tag">Google Colab</span>
+        </div>
+      </div>
+      <div class="skill-group fade-in">
+        <div class="skill-group-title">Domains</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Financial Markets</span>
+          <span class="skill-tag">Blockchain / DeFi</span>
+          <span class="skill-tag">Healthcare</span>
+          <span class="skill-tag">Supply Chain</span>
+          <span class="skill-tag">Computer Vision</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="projects">
+  <div class="container">
+    <div class="section-tag">Research &amp; Projects</div>
+    <h2 class="section-title">Selected Work</h2>
+
+    <div class="project-card fade-in">
+      <div class="project-meta">
+        <span class="project-badge">MSc Dissertation — First-Class Distinction</span>
+        <span class="project-date">2024 – 2025</span>
+      </div>
+      <h3 class="project-title">Asset Tokenisation and its Impact on Financial Markets</h3>
+      <p class="project-desc">A comprehensive predictive analytics study across four tokenised asset classes — Cryptocurrencies, Tokenised Stocks, NFTs, and Virtual Land — comparing statistical, machine learning, and deep learning models to evaluate investment potential and forecast accuracy across 9,350+ daily records.</p>
+      <div class="project-results">
+        <div class="project-results-title">Key Results</div>
+        <div class="metrics-grid">
+          <div class="metric">
+            <div class="metric-value">3.58%</div>
+            <div class="metric-label">Best MAPE (BTC-LSTM)</div>
+          </div>
+          <div class="metric">
+            <div class="metric-value">0.9998</div>
+            <div class="metric-label">R2 (Enhanced XGBoost)</div>
+          </div>
+          <div class="metric">
+            <div class="metric-value">1,933%</div>
+            <div class="metric-label">Peak ROI (NVDA)</div>
+          </div>
+          <div class="metric">
+            <div class="metric-value">4</div>
+            <div class="metric-label">Asset Classes Compared</div>
+          </div>
+        </div>
+      </div>
+      <p class="project-desc" style="margin-bottom: 16px; font-size: 14px;">
+        <strong style="color: var(--text);">Approach:</strong> Built end-to-end ML pipelines using ARIMA, Prophet, Random Forest, XGBoost, LightGBM, and LSTM. Engineered features including RSI, MACD, Bollinger Bands, rolling volatility, and lagged returns. Developed a weighted investment scoring framework combining ROI, Sharpe Ratio, Max Drawdown, and forecast accuracy. Found LSTM outperformed all models for volatile assets (XRP MAPE reduced from 49% to 5.7%), while enhanced XGBoost excelled on stable equities. Identified that NFTs and virtual land are driven by speculation (weak crypto correlation: 0.11–0.27), while tokenised stocks offered the strongest risk-adjusted returns.
+      </p>
+      <div class="project-tech">
+        <span class="tech-tag">Python</span>
+        <span class="tech-tag">TensorFlow</span>
+        <span class="tech-tag">LSTM</span>
+        <span class="tech-tag">XGBoost</span>
+        <span class="tech-tag">ARIMA</span>
+        <span class="tech-tag">Prophet</span>
+        <span class="tech-tag">Pandas</span>
+        <span class="tech-tag">Scikit-Learn</span>
+      </div>
+      <a href="./Sharib_Hasan_Dissertation.pdf" download class="btn-download-outline">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+        Download Full Dissertation (PDF)
+      </a>
+    </div>
+
+    <div class="project-card fade-in">
+      <div class="project-meta">
+        <span class="project-badge">Applied ML</span>
+        <span class="project-date">2024</span>
+      </div>
+      <h3 class="project-title">AI-Driven Demand Forecasting for UK Supermarkets</h3>
+      <p class="project-desc">Comparative study of ARIMA, Facebook Prophet, and Random Forest models on real fresh-food pricing and sales data from Aldi UK supermarkets. Evaluated forecast accuracy using RMSE and MAPE, and delivered managerial insights on AI-driven inventory optimisation, waste reduction, and dynamic pricing strategies for modern retail supply chains.</p>
+      <div class="project-tech">
+        <span class="tech-tag">Python</span>
+        <span class="tech-tag">ARIMA</span>
+        <span class="tech-tag">Prophet</span>
+        <span class="tech-tag">Random Forest</span>
+        <span class="tech-tag">Feature Engineering</span>
+      </div>
+    </div>
+
+    <div class="project-card fade-in">
+      <div class="project-meta">
+        <span class="project-badge">Healthcare ML + Visualisation</span>
+        <span class="project-date">2023 – 2024</span>
+      </div>
+      <h3 class="project-title">COVID-19 Health Impact Analysis &amp; Interactive Dashboard</h3>
+      <p class="project-desc">Two interconnected projects: (1) Machine learning analysis of Mexican Government emergency healthcare data using K-Means clustering, Neural Networks, and CNNs to forecast patient outcomes and assess disease severity from chest X-rays. (2) Interactive D3.js dashboard visualising global COVID-19 temporal and spatial patterns, providing actionable public health insights for policymakers.</p>
+      <div class="project-tech">
+        <span class="tech-tag">Python</span>
+        <span class="tech-tag">K-Means</span>
+        <span class="tech-tag">CNN</span>
+        <span class="tech-tag">Neural Networks</span>
+        <span class="tech-tag">D3.js</span>
+        <span class="tech-tag">JavaScript</span>
+      </div>
+    </div>
+
+    <div class="project-card fade-in">
+      <div class="project-meta">
+        <span class="project-badge">Bio-Inspired Computing</span>
+        <span class="project-date">2023</span>
+      </div>
+      <h3 class="project-title">Enhancing Neural Network Performance with Particle Swarm Optimisation</h3>
+      <p class="project-desc">Integrated Particle Swarm Optimisation with Artificial Neural Networks to optimise weights and biases, addressing limitations of gradient-based training in complex, non-linear problem spaces. Systematically varied hyperparameters to demonstrate improved convergence stability and computational efficiency for image and speech recognition tasks.</p>
+      <div class="project-tech">
+        <span class="tech-tag">Python</span>
+        <span class="tech-tag">PSO</span>
+        <span class="tech-tag">ANN</span>
+        <span class="tech-tag">Statistical Analysis</span>
+      </div>
+    </div>
+
+    <div class="project-card fade-in">
+      <div class="project-meta">
+        <span class="project-badge">Environmental ML</span>
+        <span class="project-date">2018</span>
+      </div>
+      <h3 class="project-title">Real-Time Air Quality Prediction System</h3>
+      <p class="project-desc">Developed a predictive ML algorithm for PM2.5 pollutant concentrations with real-time air quality forecasting delivered through an Android application covering major Indian cities. Simplified complex environmental data into accessible, actionable information for public health decision-making.</p>
+      <div class="project-tech">
+        <span class="tech-tag">Python</span>
+        <span class="tech-tag">Machine Learning</span>
+        <span class="tech-tag">Android</span>
+        <span class="tech-tag">EDA</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="container">
+    <div class="section-tag">Experience</div>
+    <h2 class="section-title">Professional Background</h2>
+
+    <div class="exp-item fade-in">
+      <div class="exp-date">Jul 2019 – Jun 2023</div>
+      <div>
+        <div class="exp-role">Data Analyst</div>
+        <div class="exp-company">Yashraj Housing Pvt Ltd — Mumbai, India</div>
+        <ul class="exp-bullets">
+          <li>Designed automated reporting pipelines (Python, SQL) tracking hiring needs, resource allocation, and KPIs across 200+ employees — improving operational efficiency by 20% and team productivity by 18%.</li>
+          <li>Built interactive dashboards with live data feeds that surfaced compliance and performance issues in real time, reducing resource wastage by 15%.</li>
+          <li>Conducted statistical analysis on 50K+ operational records to identify workforce planning bottlenecks, informing quarterly budgeting decisions across three business units.</li>
+          <li>Standardised data workflows, reducing manual reporting effort by 60% and establishing reproducible analytics processes adopted organisation-wide.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item fade-in">
+      <div class="exp-date">Mar 2018 – Nov 2018</div>
+      <div>
+        <div class="exp-role">Support Engineer</div>
+        <div class="exp-company">Teleperformance — Jaipur, India</div>
+        <ul class="exp-bullets">
+          <li>Conducted systematic GDPR compliance audits on Microsoft accounts, identifying and resolving 95% of potential data privacy risks.</li>
+          <li>Analysed account data patterns to flag anomalies and ensure secure handling of personal information.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="container">
+    <div class="section-tag">Education</div>
+    <h2 class="section-title">Academic Background</h2>
+    <div class="edu-grid">
+      <div class="edu-card fade-in">
+        <div class="edu-degree">MSc Data Science (Distinction)</div>
+        <div class="edu-school">Heriot-Watt University, Edinburgh</div>
+        <div class="edu-year">2023 – 2025</div>
+        <div class="edu-detail">Dissertation: Asset Tokenisation and its Impact on Financial Markets (Grade A). Modules: Biological Inspired Computation, Data Mining, Data Visualisation &amp; Analytics, Statistical Modelling &amp; Analysis.</div>
+      </div>
+      <div class="edu-card fade-in">
+        <div class="edu-degree">BEng Information Technology</div>
+        <div class="edu-school">Manipal University Jaipur</div>
+        <div class="edu-year">2014 – 2018</div>
+        <div class="edu-detail">Foundation in computer science, programming, software engineering, and machine learning fundamentals. Capstone: PM2.5 Air Quality Prediction System.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="contact-section">
+  <div class="container">
+    <div class="section-tag">Get In Touch</div>
+    <h2>Let's work together.</h2>
+    <p class="contact-desc">Open to Data Scientist, ML Engineer, and Applied Research roles in the UK and US.</p>
+    <div class="contact-links">
+      <a href="mailto:sharib.hasan112@gmail.com" class="contact-link">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
+        Email
+      </a>
+      <a href="https://linkedin.com/in/sharibhasan" class="contact-link" target="_blank">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+        LinkedIn
+      </a>
+      <a href="https://github.com/sharibhasan" class="contact-link" target="_blank">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg>
+        GitHub
+      </a>
+    </div>
+  </div>
+</section>
+
+<script>
+// Scroll-triggered fade-in
+const observer = new IntersectionObserver(function(entries) {
+  entries.forEach(function(entry) {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.fade-in').forEach(function(el) {
+  observer.observe(el);
+});
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+  a.addEventListener('click', function(e) {
+    e.preventDefault();
+    var target = document.querySelector(a.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth' });
+    }
+  });
+});
+</script>
+
+</body>
+</html>
